@@ -5,7 +5,7 @@ $( document ).ready( function(){
   // load existing koalas on page load
   getKoalas();
 
-  // add koala button click
+  // add koala button click and submit to server/database
   $( '#addButton' ).on( 'click', function(){
     console.log( 'in addButton on click' );
     var nameIn = $('#nameIn').val();
@@ -29,18 +29,21 @@ $( document ).ready( function(){
   }); //end addButton on click
 }); // end doc ready
 
-function getKoalas(){
+function getKoalas(){ //getting koala data append in done
   console.log( 'in getKoalas' );
   // ajax call to server to get koalas
   $.ajax({
     type: 'GET',
     url: '/koalas', //make sure this matches
-  }).done(function(responce){
-    console.log(responce);
-    var kowalas = responce;
-  }).fail(function (error){ 
-}); // display on DOM with buttons that allow edit of each
+  }).done(function(response){
+    console.log(response);
+    var koalas = response;
+    //
+  }).fail(function (error){
+    console.log('error', error);
+  }); // display on DOM with buttons that allow edit of each
 } // end getKoalas
+
 
 function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
@@ -52,5 +55,12 @@ function saveKoala( newKoala ){
     success: function( data ){
       console.log( 'got some koalas: ', data );
     } // end success
+    .done(function(response){
+      getKoalas();
+    })
+    .fail(function(error){
+      console.log('error', error);
+      
+    })
   }); //end ajax
 }
