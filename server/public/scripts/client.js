@@ -34,15 +34,15 @@ function getKoalas(){ //getting koala data append in done
   // ajax call to server to get koalas
   $.ajax({
     type: 'GET',
-    url: '/koalas', //make sure this matches
+    url: '/koalas',
   }).done(function(response){
     console.log(response);
     var koalas = response;
-    //
+    console.log(koalas);
   }).fail(function (error){
-    console.log('error', error);
-  }); // display on DOM with buttons that allow edit of each
-} // end getKoalas
+    alert('something went wrong');
+}); // display on DOM with buttons that allow edit of each
+} // end getKoalas  
 
 
 function saveKoala( newKoala ){

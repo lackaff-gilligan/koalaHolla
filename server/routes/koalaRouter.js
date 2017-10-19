@@ -11,30 +11,59 @@ var config = {
     idleTimeoutMillis: 30000
 }
 
+var pool = new pg.Pool(config);
+
 //GET route
-router.get('/', function(req, res){
-    //attempt to connect to db
-    pool.connect(function(errorConnectingToDb, db, done){
-        if(errorConnectingToDb) {
+router.get('/', function (req, res) {
+    // Attempt to connect to the database
+    pool.connect(function (errorConnectingToDb, db, done) {
+        if (errorConnectingToDb) {
+            // There was an error and no connection was made
             console.log('Error connecting', errorConnectingToDb);
             res.sendStatus(500);
         } else {
-            // We connected to the db, pool - 1
+            // We connected to the db!!!!! pool -1
             var queryText = 'SELECT * FROM "koalas";';
-            db.query(queryText, function(errorMakingQuery, result){
-                //We have recieved an error or result at this point
-                done(); //pool + 1
-                if(errorMakingQuery) {
+            db.query(queryText, function (errorMakingQuery, result) {
+                // We have received an error or result at this point
+                done(); // pool +1
+                if (errorMakingQuery) {
                     console.log('Error making query', errorMakingQuery);
                     res.sendStatus(500);
                 } else {
                     res.send(result.rows);
                 }
-            }); //END QUERY
+            }); // END QUERY
         }
-    }); //END POOL
-}); //END GET ROUTE
+    }); // END POOL
+});
 
+router.post('/', function (req, res) {
+    var koala = req.body; // This the data we sent
+    console.log(product); // Has a name and cost
 
+    // Attempt to connect to the database
+    pool.connect(function (errorConnectingToDb, db, done) {
+        if (errorConnectingToDb) {
+            // There was an error and no connection was made
+            console.log('Error connecting', errorConnectingToDb);
+            res.sendStatus(500);
+        } else {
+            // We connected to the db!!!!! pool -1
+            var queryText = 'INSERT INTO "koalas" ("name", "age", "gender", "transfer", "notes") VALUES ($1, $2, $3 , $4 , $5 );';
+            db.query(queryText, [koala.name, koala.age, koala.gender, koala.transfer, koala.notes], function (errorMakingQuery, result) {
+                // We have received an error or result at this point
+                done(); // pool +1
+                if (errorMakingQuery) {
+                    console.log('Error making query', errorMakingQuery);
+                    res.sendStatus(500);
+                } else {
+                    // Send back success!
+                    res.sendStatus(201);
+                }
+            }); // END QUERY
+        }
+    }); // END POOL
+});
 
 module.exports = router;

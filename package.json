@@ -10,7 +10,11 @@
   "author": "@devjana",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "body-parser": "^1.15.2",
+=======
+    "body-parser": "^1.18.2",
+>>>>>>> e26fbca3162128fda03e88b835cbaeb21760c12a
     "express": "^4.14.0",
     "pg": "^7.3.0"
   }
