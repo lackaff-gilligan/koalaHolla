@@ -44,6 +44,21 @@ function getKoalas(){ //getting koala data append in done
 }); // display on DOM with buttons that allow edit of each
 } // end getKoalas  
 
+function appendToDom(array) {
+  for (var i = 0; i < array.length; i++) {
+    koala = array[i];
+    var $tr = $('<tr></tr>');
+    $tr.append('<td>' + koala.name + '</td>');
+    $tr.append('<td>' + koala.age + '</td>');
+    $tr.append('<td>' + koala.gender + '</td>');
+    if (koala.transfer === true) {
+      $tr.append('<td>Ready for Transfer</td>');
+    }
+   
+
+  
+  }
+}
 
 function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
@@ -52,15 +67,12 @@ function saveKoala( newKoala ){
     url: '/koalas',
     type: 'POST',
     data: newKoala,
-    success: function( data ){
-      console.log( 'got some koalas: ', data );
-    } // end success
+    }) // end success
     .done(function(response){
       getKoalas();
     })
     .fail(function(error){
       console.log('error', error);
       
-    })
   }); //end ajax
 }
