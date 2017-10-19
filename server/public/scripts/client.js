@@ -27,13 +27,13 @@ function getKoalas(){
   console.log( 'in getKoalas' );
   // ajax call to server to get koalas
   $.ajax({
-    url: '/koalas',
     type: 'GET',
-    success: function( data ){
-      console.log( 'got some koalas: ', data );
-    } // end success
-  }); //end ajax
-  // display on DOM with buttons that allow edit of each
+    url: '/koalas',
+  }).done(function(responce){
+    console.log(responce);
+    var kowalas = responce;
+  }).fail(function (error){ 
+}); // display on DOM with buttons that allow edit of each
 } // end getKoalas
 
 function saveKoala( newKoala ){
