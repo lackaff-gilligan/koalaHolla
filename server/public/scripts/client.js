@@ -128,6 +128,7 @@ function editKoala() {
 }
 
 function updateKoala(updatedKoala) {
+  
   $.ajax({
     method: 'PUT',
     url: '/koalas/' + editingId,
