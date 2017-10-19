@@ -1,10 +1,14 @@
 console.log( 'js' );
 
+var editing = false;
+var editingId;
+
 $( document ).ready( function(){
   console.log( 'JQ' );
   // load existing koalas on page load
   getKoalas();
   $('#viewKoalas').on('click', '.remove', removeKoala);
+  $('#viewKoalas').on('click', '.edit', editKoala);
   // add koala button click and submit to server/database
   $( '#addButton' ).on( 'click', function(){
     console.log( 'in addButton on click' );
@@ -24,8 +28,16 @@ $( document ).ready( function(){
       readyForTransfer: readyForTransferIn,
       notes: notesIn,
     };
+    $('.koalaInput').empty();
+    if(editing) {
+      editing = false;
+      $('#heading').text('Add Koala');
+      updateKoala(objectToSend);
+    }
+    else {
+      saveKoala(objectToSend);
+    }
     // call saveKoala with the new obejct
-    saveKoala( objectToSend );
   }); //end addButton on click
 }); // end doc ready
 
@@ -50,6 +62,7 @@ function appendToDom(array) {
   for (var i = 0; i < array.length; i++) {
     koala = array[i];
     var $tr = $('<tr></tr>');
+    $tr.data('koala', koala);
     $tr.append('<td>' + koala.name + '</td>');
     $tr.append('<td>' + koala.age + '</td>');
     $tr.append('<td>' + koala.gender + '</td>');
@@ -96,5 +109,36 @@ function removeKoala() {
   })
   .fail(function(error){
     console.log('error', error);
+  })
+}
+
+function editKoala() {
+  console.log('edit clicked');
+  
+  editing = true;
+  editingId = $(this).data('id');
+
+  $('#heading').text('Editing Koala');
+  var existingData = $(this).closest('tr').data('koala');
+  $('#nameIn').val(existingData.name);
+  $('#ageIn').val(existingData.age);
+  $('#genderIn').val(existingData.gender);
+  $('#readyForTransferIn').val(existingData.gender);
+  $('#notesIn').val(existingData.notes);
+}
+
+function updateKoala(updatedKoala) {
+  $.ajax({
+    method: 'PUT',
+    url: '/koalas/' + editingId,
+    data: updatedKoala
+  })
+  .done(function(response){
+    console.log('response', response);
+    getKoalas();
+  })
+  .fail(function(error){
+    console.log('error', error);
+    
   })
 }
