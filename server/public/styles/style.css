@@ -1,0 +1,16 @@
+.col-md-8 {
+    background-color: magenta;
+}
+
+.col-md-4 {
+    background-color: lime;
+}
+
+img {
+    width: 100px;
+    height: auto;
+}
+
+h1, h2 {
+    font-size: 16px;
+}
