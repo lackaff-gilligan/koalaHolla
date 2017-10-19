@@ -39,6 +39,7 @@ function getKoalas(){ //getting koala data append in done
     console.log(response);
     var koalas = response;
     console.log(koalas);
+    appendToDom(koalas);
   }).fail(function (error){
     alert('something went wrong');
 }); // display on DOM with buttons that allow edit of each
@@ -51,12 +52,16 @@ function appendToDom(array) {
     $tr.append('<td>' + koala.name + '</td>');
     $tr.append('<td>' + koala.age + '</td>');
     $tr.append('<td>' + koala.gender + '</td>');
-    if (koala.transfer === true) {
-      $tr.append('<td>Ready for Transfer</td>');
-    }
-   
-
-  
+      if (koala.transfer == true ) {
+          $tr.append('<td>Ready for Transfer</td>');
+      }
+      else {
+        $tr.append('<td>Not Ready for Transfer</td>');
+      }
+    $tr.append('<td>' + koala.notes + '</td>');
+    $tr.append('<td><button class="edit">Edit</button></td>');
+    $tr.append('<td><button class="remove">Remove</button></td>');
+    $('#viewKoalas').append($tr);
   }
 }
 
