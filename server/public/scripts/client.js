@@ -55,12 +55,12 @@ function appendToDom(array) {
       if (koala.transfer == true ) {
           $tr.append('<td>Ready for Transfer</td>');
       }
-      else {
-        $tr.append('<td>Not Ready for Transfer</td>');
+      else { //need to finish button
+        $tr.append('<td><button class="ready">Mark Ready for Transfer</button></td>');
       }
     $tr.append('<td>' + koala.notes + '</td>');
-    $tr.append('<td><button class="edit">Edit</button></td>');
-    $tr.append('<td><button class="remove">Remove</button></td>');
+    $tr.append('<td><button class="edit" data-id="' + koala.id + '">Edit</button></td>');
+    $tr.append('<td><button class="remove" data-id="' + koala.id + '">Remove</button></td>');
     $('#viewKoalas').append($tr);
   }
 }
