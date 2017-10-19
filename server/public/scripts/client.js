@@ -8,15 +8,21 @@ $( document ).ready( function(){
   // add koala button click
   $( '#addButton' ).on( 'click', function(){
     console.log( 'in addButton on click' );
+    var nameIn = $('#nameIn').val();
+    var ageIn = $('#ageIn').val();
+    var genderIn = $('#genderIn').val();
+    var readyForTransferIn = $('#readyForTransferIn').val();
+    var notesIn = $('#notesIn').val();
+
     // get user input and put in an object
     // NOT WORKING YET :(
     // using a test object
     var objectToSend = {
-      name: 'testName',
-      age: 'testName',
-      gender: 'testName',
-      readyForTransfer: 'testName',
-      notes: 'testName',
+      name: nameIn,
+      age: ageIn,
+      gender: genderIn,
+      readyForTransfer: readyForTransferIn,
+      notes: notesIn,
     };
     // call saveKoala with the new obejct
     saveKoala( objectToSend );
@@ -28,7 +34,7 @@ function getKoalas(){
   // ajax call to server to get koalas
   $.ajax({
     type: 'GET',
-    url: '/koalas',
+    url: '/koalas', //make sure this matches
   }).done(function(responce){
     console.log(responce);
     var kowalas = responce;
