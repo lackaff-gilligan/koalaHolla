@@ -142,8 +142,8 @@ router.put('/:id', function (req, res) {
         } else {
             // We connected to the db!!!!! pool -1
             //var queryText = 'INSERT INTO "koalas" ("name", "age", "gender", "transfer", "notes") VALUES ($1, $2, $3 , $4 , $5 );';
-            var queryText = 'UPDATE "koalas" SET "readyForTransfer" = $1 WHERE "id" =$2;';
-            db.query(queryText, [koala.transfer ,  koalaId], function (errorMakingQuery, result) {
+            var queryText = 'UPDATE "koalas" SET "transfer" = $1 WHERE "id" =$2;';
+            db.query(queryText, [koala.transfer,  koalaId], function (errorMakingQuery, result) {
                 // We have received an error or result at this point
                 done(); // pool +1
                 if (errorMakingQuery) {
