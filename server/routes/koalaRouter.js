@@ -12,28 +12,29 @@ var config = {
 }
 
 //GET route
-router.get('/', function(req, res){
-    //attempt to connect to db
-    pool.connect(function(errorConnectingToDb, db, done){
-        if(errorConnectingToDb) {
+router.get('/', function (req, res) {
+    // Attempt to connect to the database
+    pool.connect(function (errorConnectingToDb, db, done) {
+        if (errorConnectingToDb) {
+            // There was an error and no connection was made
             console.log('Error connecting', errorConnectingToDb);
             res.sendStatus(500);
         } else {
-            // We connected to the db, pool - 1
+            // We connected to the db!!!!! pool -1
             var queryText = 'SELECT * FROM "koalas";';
-            db.query(queryText, function(errorMakingQuery, result){
-                //We have recieved an error or result at this point
-                done(); //pool + 1
-                if(errorMakingQuery) {
+            db.query(queryText, function (errorMakingQuery, result) {
+                // We have received an error or result at this point
+                done(); // pool +1
+                if (errorMakingQuery) {
                     console.log('Error making query', errorMakingQuery);
                     res.sendStatus(500);
                 } else {
                     res.send(result.rows);
                 }
-            }); //END QUERY
+            }); // END QUERY
         }
-    }); //END POOL
-}); //END GET ROUTE
+    }); // END POOL
+});
 
 
 

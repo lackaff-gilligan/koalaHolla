@@ -29,12 +29,14 @@ function getKoalas(){
   $.ajax({
     type: 'GET',
     url: '/koalas',
-  }).done(function(responce){
-    console.log(responce);
-    var kowalas = responce;
-  }).fail(function (error){ 
+  }).done(function(response){
+    console.log(response);
+    var koalas = response;
+    console.log(koalas);
+  }).fail(function (error){
+    alert('something went wrong');
 }); // display on DOM with buttons that allow edit of each
-} // end getKoalas
+} // end getKoalas  
 
 function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
