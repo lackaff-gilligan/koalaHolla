@@ -1,9 +1,11 @@
 .col-md-8 {
-    background-color: magenta;
+    background-color: lightblue;
+    height:120px;
 }
 
 .col-md-4 {
-    background-color: lime;
+    background-color: lightblue;
+    height:120px;
 }
 
 img {
