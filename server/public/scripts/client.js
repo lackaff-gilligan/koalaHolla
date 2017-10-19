@@ -136,6 +136,7 @@ function updateKoala(updatedKoala) {
   })
   .done(function(response){
     console.log('response', response);
+    $('.koalaInput').val('');
     getKoalas();
   })
   .fail(function(error){
