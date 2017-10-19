@@ -44,3 +44,27 @@ Sample Output
 Your final product may look something like this:
 
 ![sample](sample.png)
+
+
+
+SQL DATA
+
+	CREATE TABLE "koalas"(
+	
+	"id" serial primary key,
+	"name" varchar(80),
+	"age" integer,
+	"gender" varchar(80),
+	"transfer" boolean,
+	"notes" varchar(120)
+	
+	);
+	
+	INSERT INTO koalas (name, age, gender, transfer, notes) 
+	VALUES 
+('Kevin', 75, 'M' ,true, 'likes to party'),
+('Alex', 12,'M',false, 'sleeps alot'),
+('Sarah',18,'F',true,'gets into trouble alot'),
+('Marta',2,'F',true, 'has a big personality'),
+('anthony',14,'M',false, 'terrible farts'),
+('travis',100,'F',false, 'nothing special' );
