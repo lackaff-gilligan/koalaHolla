@@ -73,7 +73,6 @@ router.post('/', function (req, res) {
 
 router.delete('/:id', function (req, res) {
     var koalaId = req.params.id; //only getting the id from the client I'm deleting
-    console.log(koala); // Has a name and cost
     
     // Attempt to connect to the database
     pool.connect(function (errorConnectingToDb, db, done) {

@@ -46,6 +46,7 @@ function getKoalas(){ //getting koala data append in done
 } // end getKoalas  
 
 function appendToDom(array) {
+  $('#viewKoalas').empty();
   for (var i = 0; i < array.length; i++) {
     koala = array[i];
     var $tr = $('<tr></tr>');
@@ -84,13 +85,14 @@ function saveKoala( newKoala ){
 
 function removeKoala() {
   console.log('remove koala clicked');
-  var koalaId = $this.data('id');
+  var koalaId = $(this).data('id');
   $.ajax({
     method: 'DELETE',
-    url: '/koalas' + koalaId
+    url: '/koalas/' + koalaId
   })
   .done(function(response){
     console.log('response', response);
+    getKoalas();
   })
   .fail(function(error){
     console.log('error', error);
