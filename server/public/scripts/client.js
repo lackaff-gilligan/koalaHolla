@@ -4,7 +4,7 @@ $( document ).ready( function(){
   console.log( 'JQ' );
   // load existing koalas on page load
   getKoalas();
-
+  $('#viewKoalas').on('click', '.remove', removeKoala);
   // add koala button click and submit to server/database
   $( '#addButton' ).on( 'click', function(){
     console.log( 'in addButton on click' );
@@ -80,4 +80,19 @@ function saveKoala( newKoala ){
       console.log('error', error);
       
   }); //end ajax
+}
+
+function removeKoala() {
+  console.log('remove koala clicked');
+  var koalaId = $this.data('id');
+  $.ajax({
+    method: 'DELETE',
+    url: '/koalas' + koalaId
+  })
+  .done(function(response){
+    console.log('response', response);
+  })
+  .fail(function(error){
+    console.log('error', error);
+  })
 }
